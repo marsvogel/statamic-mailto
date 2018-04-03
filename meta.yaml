@@ -1,5 +1,5 @@
 name: Mailto
-version: "1.0.1"
+version: "1.0.2"
 description: Create mailto links with ease
 url: https://github.com/marsvogel/statamic-mailto
 developer: Christopher Bischoff
