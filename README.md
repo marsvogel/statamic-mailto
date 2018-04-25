@@ -1,4 +1,4 @@
-# Mailto
+# MailtoLink
 
 Generate a `mailto` link element with the value as the email address. If it's _not_ an email address, it's going to be one busted link. Obfuscates an email address with special characters making it hard for spam bots to sniff out and scrape off your site. Still reads like an email address as far as readers are concerned.
  
