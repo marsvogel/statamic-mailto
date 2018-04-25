@@ -1,5 +1,5 @@
-version: "1.0.3"
 name: MailtoLink
+version: "2.0.0"
 description: Create mailto links with ease
 url: https://github.com/marsvogel/statamic-mailto
 developer: Christopher Bischoff
