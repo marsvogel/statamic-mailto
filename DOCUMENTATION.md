@@ -1,112 +1,259 @@
-## Arguments
+## Arguments / Parameters
 
 Argument | Description
 -------- | -----------
-`subject` | Sets the subject of the mail. `{{ mailto:mail@example.com subject="Want to buy a package" }}`
-`cc` | Indicates those who are to receive a copy of a message addressed primarily to another (CC is the abbreviation of carbon copy). The list of recipients in copy is visible to all other recipients of the message. `{{ mailto:mail@example.com cc="anothermail@example.com" }}`
-`bcc` | An additional BCC (blind carbon copy) field is available for hidden notification; recipients listed in the BCC field receive a copy of the message, but are not shown on any other recipient's copy (including other BCC recipients). `{{ mailto:mail@example.com bcc="anothermail@example.com" }}`
-`body` | Allows you to specify a short content message for the new email. `{{ mailto:mail@example.com body="Hy there!" }}`
-`display` | The visible text shown instead of the email address `{{ mailto:mail@example.com display="Drop me a mail" }}`
-`*` | Any other argument will be used as html attribute `{{ mailto:mail@example.com class="link email-link" }}`
+`email` | The email.
+`subject` | Sets the subject of the mail.
+`cc` | Indicates those who are to receive a copy of a message addressed primarily to another (CC is the abbreviation of carbon copy). The list of recipients in copy is visible to all other recipients of the message.
+`bcc` | An additional BCC (blind carbon copy) field is available for hidden notification; recipients listed in the BCC field receive a copy of the message, but are not shown on any other recipient's copy (including other BCC recipients).
+`body` | Allows you to specify a short content message for the new email.
+`display` | The visible text shown instead of the email address
+`*` | Any other argument will be used as html attribute
 
-## Examples
+## Data format for `email`, `cc` and `bcc`
 
-Show some text instead the actual email address.
+You can use any email notation an email client would understand, you can even use multiple addresses seperated by comma.
 
-```html
-<!-- In your template -->
-{{ mailto:someone@example.com display="Send email" }}
-<!-- What the user will see -->
-<a href="mailto:someone@example.com">Send email</a>
-<!-- What actually will be rendered -->
-<a href="&#x6d;ai&#x6c;&#116;&#x6f;&#x3a;&#115;o&#x6d;&#101;&#111;&#110;e&#64;&#x65;&#120;&#x61;&#x6d;&#x70;l&#x65;&#x2e;co&#109;">Send email</a>
+```
+{{ mailto_link email="mail@example.com" display="Get in Touch" }}
+{{ mailto_link email="Jane Bacon <mail@example.com>" display="Get in Touch" }}
+{{ mailto_link email="one@example.com, two@example.com" display="Get in Touch" }}
+{{ mailto_link email="Jane Bacon <one@example.com>, John Bacon <two@example.com>" display="Get in Touch" }}
 ```
 
-Add a title attribute for a nice tooltips (The `title` attribute contains a text representing advisory information related to the element it belongs to. Such information can typically, but not necessarily, be presented to the user as a tooltip.)
-
-```html
-<!-- In your template -->
-{{ mailto:mail@example.com title="Drop me a nice compliment" }}
-<!-- What the user will see -->
-<a href="mailto:mail@example.com" title="Drop me a nice compliment">mail@example.com</a>
-<!-- What actually will be rendered -->
-<a href="&#109;&#x61;&#x69;&#108;&#x74;o:m&#97;&#x69;l&#x40;&#x65;&#x78;a&#x6d;pl&#101;.&#99;&#111;&#109;" title="Drop me a nice compliment">m&#97;&#x69;l&#x40;&#x65;&#x78;a&#x6d;pl&#101;.&#99;&#111;&#109;</a>
+```.language-output
+<a href="mailto:mail@example.com">Get in Touch</a>
+<a href="mailto:Jane Bacon <mail@example.com>">Get in Touch</a>
+<a href="mailto:one@example.com, two@example.com">Get in Touch</a>
+<a href="mailto:Jane Bacon <one@example.com>, John Bacon <two@example.com>">Get in Touch</a>
 ```
 
-Suggest a mail subject.
+## Usage
 
-```html
-<!-- In your template -->
-{{ mailto:mail@example.com subject="Want to buy a package" }}
-<!-- What the user will see -->
-<a href="mailto:mail@example.com?subject=Want%20to%20buy%20a%20package">mail@example.com</a>
-<!-- What actually will be rendered -->
-<a href="&#109;&#97;&#105;&#x6c;t&#111;&#x3a;&#x6d;&#97;i&#108;&#64;&#x65;&#x78;a&#x6d;&#112;l&#101;&#x2e;&#99;&#x6f;m&#63;su&#x62;j&#101;&#x63;t=&#87;an&#116;&#x25;2&#x30;to&#37;&#50;&#x30;&#98;&#117;&#121;%&#x32;&#x30;&#97;%&#50;&#x30;p&#x61;ck&#x61;g&#101;">&#x6d;&#97;i&#108;&#64;&#x65;&#x78;a&#x6d;&#112;l&#101;&#x2e;&#99;&#x6f;m</a>
+## The Tag
+
+Like any other [Tag] you can use variables as parameters. There is also a `{{ glide }}` like shorthand, so you don't have to set the `email` parameter explicit.
+
+```.language-yaml
+contact: "mail@example.com"
 ```
 
-CC another email address.
+```
+{{ mailto_link :email="contact" }}
 
-```html
-<!-- In your template -->
-{{ mailto:mail@example.com cc="anothermail@example.com" }}
-<!-- What the user will see -->
-<a href="mailto:mail@example.com?cc=anothermail%40example.com">mail@example.com</a>
-<!-- What actually will be rendered -->
-<a href="&#x6d;&#x61;&#x69;l&#x74;o&#58;&#x6d;&#97;&#105;l&#64;exa&#x6d;&#112;&#108;e&#x2e;&#99;&#111;&#109;&#x3f;cc&#x3d;&#97;&#110;&#x6f;ther&#x6d;&#97;&#x69;&#108;%4&#48;exampl&#x65;&#x2e;&#99;&#x6f;m">&#x6d;&#97;&#105;l&#64;exa&#x6d;&#112;&#108;e&#x2e;&#99;&#111;&#109;</a>
+<!-- shorthand syntax: -->
+{{ mailto_link:contact }}
 ```
 
-BCC another email address.
-
-```html
-<!-- In your template -->
-{{ mailto:mail@example.com bcc="anothermail@example.com" }}
-<!-- What the user will see -->
-<a href="mailto:mail@example.com?bcc=anothermail%40example.com">mail@example.com</a>
-<!-- What actually will be rendered -->
-<a href="m&#97;il&#x74;&#111;&#x3a;ma&#x69;l&#x40;e&#x78;a&#x6d;p&#x6c;&#x65;&#x2e;&#99;&#111;&#109;?&#x62;&#99;&#99;&#61;a&#110;&#111;&#x74;h&#101;&#114;&#109;&#x61;&#105;&#108;%&#52;0&#101;&#x78;&#97;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#x6d;">ma&#x69;l&#x40;e&#x78;a&#x6d;p&#x6c;&#x65;&#x2e;&#99;&#111;&#109;</a>
+```.language-output
+<a href="mailto:mail@example.com">mail@example.com</a>
 ```
 
-Suggest a mail body.
+### Multiple email addresses
 
-```html
-<!-- In your template -->
-{{ mailto:mail@example.com body="Hy there!" }}
-<!-- What the user will see -->
-<a href="mailto:mail@example.com?body=Hy%20there%21">mail@example.com</a>
-<!-- What actually will be rendered -->
-<a href="&#109;&#97;il&#x74;o:m&#x61;i&#x6c;&#64;&#101;&#120;&#97;&#x6d;&#x70;&#108;e&#x2e;&#x63;om?&#98;&#111;&#x64;&#x79;&#61;&#x48;y%2&#x30;t&#104;e&#114;&#101;&#37;2&#49;">m&#x61;i&#x6c;&#64;&#101;&#120;&#97;&#x6d;&#x70;&#108;e&#x2e;&#x63;om</a>
+If you have a list of email addresses you can loop over them like you would normaly do.
+
+```.language-yaml
+contacts: 
+  - "one@example.com"
+  - "two@example.com"
 ```
 
-Show some text instead the actual email address.
+Since the current iteration of the loop would be output using `{{ value }}`, you can reference that in the tag. This is very much like the `glide` tags behaves.
 
-```html
-<!-- In your template -->
-{{ mailto:mail@example.com display="Drop me a mail" }}
-<!-- What the user will see -->
-<a href="mailto:mail@example.com">Drop me a mail</a>
-<!-- What actually will be rendered -->
-<a href="&#109;&#97;i&#108;&#116;o&#58;&#x6d;&#x61;&#105;&#x6c;&#64;e&#120;a&#x6d;p&#108;&#x65;.co&#x6d;">Drop me a mail</a>
+```
+{{ contacts }}
+  {{ mailto_link :email="value" }}
+{{ /contacts }}
+
+<!-- shorthand syntax: -->
+{{ contacts }}
+  {{ mailto_link:value }}
+{{ /contacts }}
 ```
 
-Add some classes to the anchor tag.
+```.language-output
+<a href="mailto:one@example.com">one@example.com</a>
+<a href="mailto:two@example.com">two@example.com</a>
+```
 
-```html
-<!-- In your template -->
-{{ mailto:mail@example.com class="link email-link" }}
-<!-- What the user will see -->
+### Complex Templates
+
+If you need the email address to be generated with another tag, you can’t just drop that into the email parameter. Instead, use the tag as a tag pair. The contents of the tag will be used as the `email` parameter.
+
+```.language-yaml
+contact: "mail@example.com"
+```
+
+```
+{{ mailto_link }}
+  {{ contact }}
+{{ /mailto_link }}
+```
+
+```.language-output
+<a href="mailto:mail@example.com">mail@example.com</a>
+```
+
+### Specifying details
+
+In addition to the `email` address, you can provide other information. Supported parameters are `subject`, `cc`, `bcc` and `body`. Each parameter and its value is specified as a query term.
+
+```.language-yaml
+contact: "mail@example.com"
+subject: "Interest in Bacon"
+cc: "two@example.com"
+```
+
+```
+{{ mailto_link :email="contact" :subject="subject" :cc="cc" }}
+
+<!-- shorthand syntax: -->
+{{ mailto_link:contact :subject="subject" :cc="cc" }}
+```
+
+```.language-output
+<a href="mailto:mail@example.com?subject=Interest in Bacon&cc=two@example.com">mail@example.com</a>
+```
+
+If you want to change the text node of the anchor element, you can use the `display` parameter.
+
+```.language-yaml
+contact: "mail@example.com"
+```
+
+```
+{{ mailto_link :email="contact" display="Get in Touch" }}
+
+<!-- shorthand syntax: -->
+{{ mailto_link:contact display="Get in Touch" }}
+```
+
+```.language-output
+<a href="mailto:mail@example.com">Get in Touch</a>
+```
+
+### Adding html attributes and classes
+
+Every parameter that is not `email`, `subject`, `cc`, `bcc`, `body`, `display` or `href` will be added as a html attribute. If you want to add a couple of classes to the anchor element, just add a `class` parameter.
+
+```.language-yaml
+contact: "mail@example.com"
+```
+
+```
+{{ mailto_link :email="contact" class="link email-link" }}
+
+<!-- shorthand syntax: -->
+{{ mailto_link:contact class="link email-link" }}
+```
+
+```.language-output
 <a href="mailto:mail@example.com" class="link email-link">mail@example.com</a>
-<!-- What actually will be rendered -->
-<a href="&#109;&#x61;i&#108;&#x74;o&#x3a;ma&#105;&#x6c;&#64;&#101;&#x78;&#97;&#109;&#112;le.&#99;&#111;&#109;" class="link email-link">ma&#105;&#x6c;&#64;&#101;&#x78;&#97;&#109;&#112;le.&#99;&#111;&#109;</a>
 ```
 
-Use multiple email addresses.
+### Consuming arrays
 
-```html
+When using the short hand syntax, you can add use an array instead of a simple email string.
 
-<!-- In your template -->
-{{ mailto:first@example.com,second@example.com cc="third@example.com,fourth@example.com" bcc="fifth@example.com,sixth@example.com" display="Spam everyone!" }}
-<!-- What the user will see -->
-<a href="mailto:first@example.com,second@example.com?cc=third%40example.com%2Cfourth%40example.com&amp;bcc=fifth%40example.com%2Csixth%40example.com">Spam everyone!</a>
-<!-- What actually will be rendered -->
-<a href="&#109;&#x61;&#x69;&#108;&#x74;&#x6f;:&#102;&#x69;&#114;&#115;&#116;&#x40;&#x65;&#x78;&#97;&#x6d;p&#x6c;&#x65;.c&#111;&#109;&#x2c;&#115;&#101;&#99;&#111;n&#x64;&#64;&#x65;&#x78;&#x61;mp&#x6c;&#101;&#46;c&#x6f;m?&#x63;&#x63;=&#116;h&#105;r&#100;%&#52;0&#101;&#120;&#97;&#x6d;&#x70;&#x6c;e&#x2e;co&#x6d;&#x25;&#50;&#x43;&#x66;&#111;&#x75;&#114;&#116;&#x68;&#37;4&#x30;e&#x78;&#97;m&#112;le&#x2e;&#x63;&#x6f;&#109;&&#98;&#x63;&#x63;&#61;&#102;&#x69;&#x66;&#116;&#104;&#x25;&#52;0&#x65;&#x78;&#x61;&#109;&#x70;&#108;e&#x2e;&#99;&#x6f;&#109;%&#50;&#x43;&#115;&#x69;&#120;th&#x25;&#x34;&#48;&#x65;&#120;&#97;m&#112;l&#x65;.&#x63;&#x6f;&#x6d;">Spam everyone!</a>
+```.language-yaml
+contact:
+  email: "Jane Bacon <one@example.com>"
+  cc: "John Bacon <two@example.com>"
+  bcc: "Eliah Bacon <three@example.com>"
+  subject: "Interest in Bacon"
+  body: "Don't forget to add your contact informations :)"
+  display: "Get in Touch"
 ```
+
+```
+<!-- shorthand syntax: -->
+{{ mailto_link:contact class="link email-link" }}
+```
+
+```.language-output
+<a href="mailto:Jane Bacon <one@example.com>?cc=John Bacon <two@example.com>&bcc=Eliah Bacon <three@example.com>&subject=Interest in Bacon&body=Don't forget to add your contact informations :)" class="link email-link">Get in Touch</a>
+```
+
+## The modifier
+
+The modifier takes the same parameters as the tag. The very basic example looks like this:
+
+```.language-yaml
+contact: "mail@example.com"
+```
+
+```
+<!-- shorthand syntax: -->
+{{ contact | mailto_link }}
+```
+
+```.language-output
+<a href="mailto:mail@example.com">mail@example.com</a>
+```
+
+### Consuming arrays
+
+You can add use an array instead of a simple email string.
+
+```.language-yaml
+contact:
+  email: "Jane Bacon <one@example.com>"
+  cc: "John Bacon <two@example.com>"
+  bcc: "Eliah Bacon <three@example.com>"
+  subject: "Interest in Bacon"
+  body: "Don't forget to add your contact informations :)"
+  display: "Get in Touch"
+```
+
+```
+<!-- shorthand syntax: -->
+{{ contact | mailto_link }}
+```
+
+```.language-output
+<a href="mailto:Jane Bacon <one@example.com>?cc=John Bacon <two@example.com>&bcc=Eliah Bacon <three@example.com>&subject=Interest in Bacon&body=Don't forget to add your contact informations :)">Get in Touch</a>
+```
+
+## The API
+
+In another addon, you may do `$this->api('MailtoLink')->create()` to get a `MailtoLinkModel` object.
+
+``` .language-php
+<?php
+
+/**
+ * MailtoLinkModel constructor.
+ * 
+ * @param array $parameters
+ */
+$mailto = $this->api('MailtoLink')->create()
+
+/**
+ * You can set any parameter like so
+ */
+$mailto->email = "Jane Bacon <one@example.com>";
+$mailto->cc = "John Bacon <two@example.com>";
+$mailto->bcc = "Eliah Bacon <three@example.com>";
+$mailto->subject = "Interest in Bacon";
+$mailto->body = "Don't forget to add your contact informations :)";
+$mailto->display = "Get in Touch";
+
+/**
+ * Access any parameter
+ */
+
+echo $mailto->email;
+// Jane Bacon <one@example.com>
+
+/**
+ * Output your html
+ */
+echo $mailto->html();
+```
+
+```.language-output
+<a href="mailto:Jane Bacon <one@example.com>?cc=John Bacon <two@example.com>&bcc=Eliah Bacon <three@example.com>&subject=Interest in Bacon&body=Don't forget to add your contact informations :)">Get in Touch</a>
+```
+
+[Tag](https://docs.statamic.com/antlers#tags)

@@ -4,16 +4,16 @@ Generate a `mailto` link element with the value as the email address. If it's _n
  
  Obfuscation is a method of encoding content so that the source code is hard or impossible to understand. This is generally used on email addresses to prevent spambots from recognizing it as an email address and keeping you safe from unwanted emails.
  
-## Usage
+## Basic Usage
 
-This tag takes all parameters, and formats it for HTML attribute key:value pairs.
+This AddOn provides a modifier, a tag and an API. Head over to the documentation to get the details.
 
-```html
-{{ mailto:mail@example.com title="Drop me a nice compliment" }}
+```
+{{ mailto_link email="mail@example.com" }}
 ```
 
-```html
-<a href="&#x6d;&#x61;i&#x6c;&#116;o&#58;&#109;&#97;&#x69;l&#64;e&#120;&#97;&#x6d;&#112;&#108;&#101;&#46;c&#111;m" title="Drop me a nice compliment">&#109;&#97;&#x69;l&#64;e&#120;&#97;&#x6d;&#112;&#108;&#101;&#46;c&#111;m</a>
+```.language-output
+<a href="mailto:mail@example.com">mail@example.com</a>
 ```
 
 Photo by [Mathyas Kurmann] on [Unsplash]
