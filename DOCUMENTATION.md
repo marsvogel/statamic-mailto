@@ -256,4 +256,16 @@ echo $mailto->html();
 <a href="mailto:Jane Bacon <one@example.com>?cc=John Bacon <two@example.com>&bcc=Eliah Bacon <three@example.com>&subject=Interest in Bacon&body=Don't forget to add your contact informations :)">Get in Touch</a>
 ```
 
+## Migrating from Version 1
+
+Except the real new stuff, there are a couple of breaking changes:
+
+* The tag `mailto` is renamed to `mailto_links` to avoid name collisions
+* The shorthand syntax wont take emails anymore
+
+```
+<!-- this won't work anymore -->
+{{ mailto_link:mail@example.com }}
+```
+
 [Tag](https://docs.statamic.com/antlers#tags)
