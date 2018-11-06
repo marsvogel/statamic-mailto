@@ -162,7 +162,7 @@ contact:
   cc: "John Bacon <two@example.com>"
   bcc: "Eliah Bacon <three@example.com>"
   subject: "Interest in Bacon"
-  body: "Don't forget to add your contact informations :)"
+  body: "Don't forget to add your contact information :)"
   display: "Get in Touch"
 ```
 
@@ -172,7 +172,7 @@ contact:
 ```
 
 ```.language-output
-<a href="mailto:Jane Bacon <one@example.com>?cc=John Bacon <two@example.com>&bcc=Eliah Bacon <three@example.com>&subject=Interest in Bacon&body=Don't forget to add your contact informations :)" class="link email-link">Get in Touch</a>
+<a href="mailto:Jane Bacon <one@example.com>?cc=John Bacon <two@example.com>&bcc=Eliah Bacon <three@example.com>&subject=Interest in Bacon&body=Don't forget to add your contact information :)" class="link email-link">Get in Touch</a>
 ```
 
 ## The modifier
@@ -202,7 +202,7 @@ contact:
   cc: "John Bacon <two@example.com>"
   bcc: "Eliah Bacon <three@example.com>"
   subject: "Interest in Bacon"
-  body: "Don't forget to add your contact informations :)"
+  body: "Don't forget to add your contact information :)"
   display: "Get in Touch"
 ```
 
@@ -212,7 +212,7 @@ contact:
 ```
 
 ```.language-output
-<a href="mailto:Jane Bacon <one@example.com>?cc=John Bacon <two@example.com>&bcc=Eliah Bacon <three@example.com>&subject=Interest in Bacon&body=Don't forget to add your contact informations :)">Get in Touch</a>
+<a href="mailto:Jane Bacon <one@example.com>?cc=John Bacon <two@example.com>&bcc=Eliah Bacon <three@example.com>&subject=Interest in Bacon&body=Don't forget to add your contact information :)">Get in Touch</a>
 ```
 
 ## The API
@@ -236,7 +236,7 @@ $mailto->email = "Jane Bacon <one@example.com>";
 $mailto->cc = "John Bacon <two@example.com>";
 $mailto->bcc = "Eliah Bacon <three@example.com>";
 $mailto->subject = "Interest in Bacon";
-$mailto->body = "Don't forget to add your contact informations :)";
+$mailto->body = "Don't forget to add your contact information :)";
 $mailto->display = "Get in Touch";
 
 /**
@@ -253,7 +253,7 @@ echo $mailto->html();
 ```
 
 ```.language-output
-<a href="mailto:Jane Bacon <one@example.com>?cc=John Bacon <two@example.com>&bcc=Eliah Bacon <three@example.com>&subject=Interest in Bacon&body=Don't forget to add your contact informations :)">Get in Touch</a>
+<a href="mailto:Jane Bacon <one@example.com>?cc=John Bacon <two@example.com>&bcc=Eliah Bacon <three@example.com>&subject=Interest in Bacon&body=Don't forget to add your contact information :)">Get in Touch</a>
 ```
 
 ## Migrating from Version 1
